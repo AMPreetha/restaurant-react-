@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense tracker</title>
+</head>
+<body >
+    <form onsubmit="saveToLocalStorage(event)">
+    <center>
+    <label style="font-size: 150%;font-style: oblique;">Choose ExpenseAmount:</label>
+    <br>
+    <br>
+    <select name="price" id="price" style="width:45%" ;required >
+        <option value="">    </option>
+        <option value="">100</option>
+        <option value="">200</option>
+        <option value="">300</option>
+        <option value="">400</option>
+        <option value="">500</option>
+        <option value="">600</option>
+        <option value="">700</option>
+    </select>
+    <br>
+    <br>
+    <label style="font-size: 150%;font-style: oblique;" >Choose Description:</label>
+    <br>
+    <br>
+    <select name="des" id="des" style="width:45%"; required>
+        <option value="">    </option>
+        <option value="">hall</option>
+        <option value="">movie</option>
+        <option value="">theatre</option>
+        <option value="">room</option>
+        <option value="">Ac</option>
+        <option value="">fridge</option>
+    </select>
+    <br>
+    
+    <br>
+    <label style="font-size: 150%;font-style: oblique;" >choose Category:
+    </label>
+    <br>
+    <br>
+    <select name="cat" id="cat" style="width:45%"; required>
+        <option value="">    </option>
+        <option value="" >on vacation</option>
+        <option value="">beach</option>
+        <option value="">marina</option>
+        <option value="">paris</option>
+        <option value="">chennai</option>
+        <option value="">bangalore</option>
+        <option value="">kerala</option>
+    </select>
+    <br>
+    <button>submit</button>
+  </center>
+</form>
+ 
+  <ul id="form">
+    
+  </ul>
+  
+  <script>
+
+    function saveToLocalStorage(event){
+        event.preventDefault();
+      
+      const price=event.target.price.value;
+      const des=event.target.des.value;
+      const cat=event.target.cat.value;
+      localStorage.setItem('price',price);
+      localStorage.setItem('des',des);
+      localStorage.setItem('cat',cat);
+      const ans={
+        price,
+        des,
+        cat
+      }
+      showUserOnScreen(ans)
+    }
+    function showUserOnScreen(ans){
+    const parentElem=document.getElementById('form');
+    const childElem=document.createElement('li')
+    childElem.id='list';
+    childElem.textContent=ans.price+'-'+ans.des+'-'+ans.cat+'-';
+    
+    
+    parentElem.appendChild(childElem)
+    edit(childElem)
+    }
+    function edit(childElem){
+    var click=document.createElement('button');
+    click.id='edit';
+    click.innerHTML='edit';
+    childElem.append(click);
+    remove(childElem)
+    }
+    
+    function remove(childElem){
+    var del=document.createElement('button');
+    del.id='remove';
+    del.innerHTML='remove';
+    childElem.append(del);
+    
+    }
+    
